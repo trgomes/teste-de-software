@@ -131,8 +131,11 @@ public class OperacaoTest {
 	public void exer5b(){
 		assertEquals(1, op.loop(1));
 	}
-	@Test
+	
+	@Test(timeout=1500)
 	public void exer5c(){
 		assertEquals(1, op.loop(1));
 	}
 }
+
+
