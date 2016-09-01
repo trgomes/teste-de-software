@@ -3,6 +3,7 @@ package aula;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Before;
@@ -31,7 +32,7 @@ public class OperacaoFatorialTest {
 	
 	@Parameterized.Parameters
 	public static Collection parametros(){
-		return Array.asList(new Object[][]{
+		return Arrays.asList(new Object[][]{
 			{0,1},
 			{1,1},
 			{2,1},
