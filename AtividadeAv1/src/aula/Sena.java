@@ -17,7 +17,7 @@ public class Sena {
 				nros[i] = (int) (Math.random() * 60 + 1);
 			}
 			Arrays.sort(nros); /* ordena o array */
-		}else{
+		}else{			
 			throw new Exception("Uma aposta precisa ter [6,12] números");
 		}
 	}
