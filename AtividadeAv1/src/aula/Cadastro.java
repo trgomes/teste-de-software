@@ -9,6 +9,7 @@ import java.io.IOException;
 public class Cadastro {
 	private File file;
 	private FileWriter fw;
+	
 	public Cadastro(String filename) throws IOException{
 		file = new File(filename);
 		fw = new FileWriter(file);

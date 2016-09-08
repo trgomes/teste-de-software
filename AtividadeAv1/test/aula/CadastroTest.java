@@ -33,14 +33,31 @@ public class CadastroTest {
 	//Exercicio 2 - b
 	
 	@Test //1 e "De volta para o futuro I"
-	public void testInsert() throws IOException{
-		cad = new Cadastro("filmes.txt");		
-		cad .insert(1, "De volta para o futuro I");
+	public void testInsert1() throws IOException{
+		cad = new Cadastro("filmes.txt");	
 		
-		cad.imprimir();
-		
-//		assertEquals("1;De volta para o futuro I", cad.imprimir());	
+		assertTrue(cad.insert(1, "De volta para o futuro I"));
 	}
 	
+	@Test //0 e "Missão impossível I"
+	public void testInsert2() throws IOException{
+		cad = new Cadastro("filmes.txt");	
+		
+		assertFalse(cad.insert(0, "Missão impossível I"));
+	}
 	
+	@Test //2 e null
+	public void testInsert3() throws IOException{
+		cad = new Cadastro("filmes.txt");	
+		
+		assertFalse(cad.insert(2, null));	
+	}
+	
+	@Test //3 e ""
+	public void testInsert4() throws IOException{
+		cad = new Cadastro("filmes.txt");		
+		assertFalse(cad.insert(3, ""));
+	}
+	
+
 }
