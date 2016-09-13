@@ -6,8 +6,7 @@ import org.junit.Test;
 
 public class CelulaTest {
 	
-	Celula cl;
-	
+	Celula cl;	
 	
 
 	@Test //new Celula("Ana")
@@ -26,8 +25,6 @@ public class CelulaTest {
 	public void construtor3() throws Exception {
 		cl = new Celula(null);
 		assertEquals(null, cl.getNome());
-	}
-	
-	
+	}	
 
 }
