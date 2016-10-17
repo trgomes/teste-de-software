@@ -1,76 +1,104 @@
 package aula;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
+import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 public class SenaTest {
-
-	/* a anotação @Mock indica que este
-	 * atributo deverá receber um objeto Mock */
-	@Mock
-	private Sena op = null;
+	
+	private Sena sena=mock(Sena.class);
+	
 	@Before
-	public void setUp() throws Exception {
-		op = mock(Sena.class);
-		when(op.create(5)).thenThrow(new NullPointerException());
-		when(op.create(6)).thenReturn(new int[]{1,2,3,4,5,6});
-		when(op.create(12)).thenReturn(new int[]{1,2,3,4,5,6,7,8,9,10,11,12});
-		when(op.create(13)).thenThrow(new NullPointerException());
+	public void setUp()
+	{
+		when(sena.create(5)).thenThrow(new NullPointerException());
+		when(sena.create(6)).thenReturn(new int[]{1,6,8,19,56,60});
+		when(sena.create(12)).thenReturn(new int[]{1,6,10,14,17,19,24,36,47,57,59,60});
+		when(sena.create(13)).thenThrow(new NullPointerException());
 	}
-
+	
+	// n < 6 - exe 1a
 	@Test(expected=NullPointerException.class)
-	public void test1a1() {
-		assertEquals(5, op.create(5).length, 0 );
+	public void test1() {
+		sena.create(5);
 	}
-
-	@Test
-	public void test1a2() {
-		assertEquals(6, op.create(6).length, 0 );
-	}
-
-	@Test
-	public void test1a3() {
-		assertEquals(12, op.create(12).length, 0 );
-	}
-
+	
+	// n > 12 - exe 1a
 	@Test(expected=NullPointerException.class)
-	public void test1a4() {
-		assertEquals(13, op.create(13).length, 0 );
+	public void test2() {
+		sena.create(13);
 	}
-
-	//Testar se todos os números gerados no objeto Sena estão no intervalo [1,60]
+	
+	// Testar se o tamanho do array Ã© igual a 6 - exe 1a
 	@Test
-	public void exer1b() throws Exception{		
-		for(int elemento: op.create(12) ){
-			if (elemento > 60 || elemento < 1) fail("Fora do range definido");
+	public void test3() {
+		assertEquals(6, sena.create(6).length);
+	}
+	
+	// Testar se o tamho do array Ã© igual a 12  - exe 1a
+	@Test
+	public void test4() {
+		assertEquals(12, sena.create(12).length);
+	}
+	
+	//Testar se os numeros estÃ£o no intervalo - exe 1b
+	@Test
+	public void test5() {
+		
+		for(int elemento: sena.create(6))
+		{
+			if(elemento < 1 || elemento > 60)
+			{
+				fail("O numero " + elemento + "nÃ£o estÃ¡ no intervalo");
+			}
 		}
 	}
 
-	//Testar se os números do objeto Sena estão ordenados
+	// Testar se os numeros estÃ£o ordenados - exe 1c
 	@Test
-	public void exer1c() throws Exception{
-		//pega todos os numeros da lista gerada
-		int antigo = 0;
-		for(int elemento: op.create(12) ){
-			if (antigo > elemento) fail("Não está ordenada");
-			antigo = elemento;
+	public void test6()
+	{
+		int anterior = 0;
+		
+		for(int elemento: sena.create(12) )
+		{
+			if (anterior > elemento) 
+			{
+				fail("NÃ£o estÃ¡ ordenada");
+			}
+			anterior = elemento;
 		}
+	}
+	
+	
+	// Testar se existem numeros repetido - exe 1d
+	@Test
+	public void test7()
+	{
+		int cont = 0;
+		
+		for(int numero: sena.create(12))
+		{
+			for(int segundoNumero: sena.create(12))
+			{
+				if(numero == segundoNumero)
+				{
+					cont += 1;
+				}
+			}
+			
+			if(cont > 1)
+			{
+				fail("Contem numeros repetidos");
+			}
+			
+			cont = 0;
+		}		
 	}
 
-	//Testar se existem números repetidos no objeto Sena.
-	@Test
-	public void exer1d() throws Exception{
-		//pega todos os numeros da lista gerada
-		ArrayList<Integer> contidos = new ArrayList<Integer>();
-		for(int elemento : op.create(12) ){
-			if(contidos.contains(elemento)) fail("Elemento repetido");
-		}
-	}
+
 
 }
